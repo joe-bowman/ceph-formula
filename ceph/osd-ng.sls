@@ -21,7 +21,7 @@ zap_disk_{{ data_path }}:
 
 prepare_osd_device_{{ data_path }}:
   cmd.run:
-    - name: 'ceph-volume lvm prepare --cluster {{ ceph.cluster_name }} --data {{ data_path }} {{ '--journal' if journal_path }}{{ journal_path }}'
+    - name: 'ceph-volume lvm prepare --cluster {{ ceph.cluster_name }} --data {{ data_path }} {{ '--journal '+journal_path if journal_path else '' }}'
     - unless: "ceph-volume lvm list | grep -E ' *{{ data_path }}1? .*ceph data, (prepared|active)'"
 
 {% endfor %}
