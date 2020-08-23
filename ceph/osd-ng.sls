@@ -1,4 +1,10 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+
 ## OSD management for Octopus release onwards - uses ceph-volume instead of deprecated cept-disk
+
+{% from "ceph/map.jinja" import ceph with context -%}
+
 {% for active_osd in ceph.osds.active %}
     {% set osd_params = active_osd.split(':') %}
     {% set data_path = osd_params[0] %}
